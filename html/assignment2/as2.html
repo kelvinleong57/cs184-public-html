@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>kelvin leong - cs 184</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top" onclick=$("#menu-close").click();>Start Bootstrap</a>
+            </li>
+            <li>
+                <a href="#top" onclick=$("#menu-close").click();>Home</a>
+            </li>
+            <li>
+                <a href="#about" onclick=$("#menu-close").click();>About</a>
+            </li>
+            <li>
+                <a href="#services" onclick=$("#menu-close").click();>Services</a>
+            </li>
+            <li>
+                <a href="#portfolio" onclick=$("#menu-close").click();>Portfolio</a>
+            </li>
+            <li>
+                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>Assignment 2 - Ray Tracer</h1>
+
+    <dl>
+        <dt>Team</dt>
+        <dd>- William Wu (cs184-aco)</dd>
+        <dd>- Kelvin Leong (cs184-aat)</dd>
+    </dl>
+
+    <h4>The first scene from the ray tracing journal with shadows, spheres, and triangles.</h4>
+    <img src="img/scene0.png" class="img-rounded img-responsive img-scaled-down"><br>
+    <h4>Scene input:</h4>
+    <blockquote>
+        <code>
+            cam    0.0 0.0 0.0    -1.0 -1.0 -3.0    1.0 -1.0 -3.0    -1.0 1.0 -3.0    1.0 1.0 -3.0<br>
+            mat    0.1 0.1 0.1    1.0 0.0 1.0    1.0 1.0 1.0    50.0    0.0 0.0 0.0<br>
+            sph    0.0 0.0 -20.0    3.0<br>
+            mat    0.1 0.1 0.1    1.0 1.0 0.0    1.0 1.0 1.0    50.0    0.0 0.0 0.0<br>
+            sph    -2.0 2.0 -15.0    1.0<br>
+            mat    0.1 0.1 0.1    0.0 1.0 1.0    1.0 1.0 1.0    50.0    0.0 0.0 0.0<br>
+            sph    -2.0 -2.0 -15.0    1.0<br>
+            mat    0.1 0.1 0.1    0.1 0.1 0.1    1.0 1.0 1.0    50.0    1.0 1.0 1.0<br>
+            tri    5.0 5.0 -17.0    1.0 4.0 -20.0    6.0 -1.0 -20.0<br>
+            ltd    0.57735027 -0.57735027 -0.57735027    1.0 1.0 1.0<br>
+            ltd    0.57735027  0.57735027 -0.57735027    0.0 0.0 1.0
+        </code>
+    </blockquote>
+    
+    <hr>
+    
+    <h4>The second scene from the ray tracing journal with reflections and spheres.</h4>
+    <img src="img/scene1.png" class="img-rounded img-responsive img-scaled-down"><br>
+    <h4>Scene input:</h4>
+    <blockquote>
+        <code>
+            cam    0.0 0.0 0.0    -1.0 -1.0 -3.0    1.0 -1.0 -3.0    -1.0 1.0 -3.0    1.0 1.0 -3.0<br>
+            ltd   0.57735027 -0.57735027 -0.57735027  1.0  1.0  1.0<br>
+            ltd  -0.57735027  0.57735027  0.57735027  1.0  1.0  1.0<br>
+            mat 0.1 0.1 0.1 1.0 0.0 0.0 1.0 1.0 1.0 50.0 0.9 0.9 0.9<br>
+            sph 0.0 0.0 -17.0 2.0<br>
+            mat 0.1 0.1 0.1 0.0 1.0 0.0 1.0 1.0 1.0 50.0 0.9 0.9 0.9<br>
+            sph 0.0 4.0 -17.0 1.5<br>
+            mat 0.1 0.1 0.1 0.0 0.0 1.0 1.0 1.0 1.0 50.0 0.9 0.9 0.9<br>
+            sph 0.0 -4.0 -17.0 1.5<br>
+            mat 0.1 0.1 0.1 1.0 1.0 0.0 1.0 1.0 1.0 50.0 0.9 0.9 0.9<br>
+            sph 4.0 0.0 -17.0 1.5<br>
+            mat 0.1 0.1 0.1 0.0 1.0 1.0 1.0 1.0 1.0 50.0 0.9 0.9 0.9<br>
+            sph -4.0 0.0 -17.0 1.5
+        </code>
+    </blockquote>
+    
+    <hr>
+
+    <h4>This renders a teapot obj file. The image on the left sends only one ray per pixel, while the right one sends 25 rays per pixels to show blur.</h4>
+    <div class="col-md-6">
+        <a href="#"><img src="img/teapot25.png"/></a>
+    </div>
+    <div class="col-md-6">
+        <a href="#"><img src="img/teapot1.png"/></a>
+    </div>
+    <br><br>
+    <h4>Scene input:</h4>
+    <blockquote>
+        We ran <code>./draw.sh teapot</code> using our custom script, but the input scene is duplicated below for convenience:
+        <br><br>
+        <code>
+            cam    0.0 0.0 20.0    -3.0 -3.0 5.0    3.0 -3.0 5.0    -3.0 3.0 5.0    3.0 3.0 5.0<br>
+            mat    0.1 0.1 0.1    0.1 0.5 0.4    0.0 0.0 1.0    50.0    0.0 0.0 0.0<br>
+            obj	   ../obj/teapot.obj<br>
+            ltd    -5.0 -5.0 -5.0    1.0 1.0 1.0<br>
+            ltd    5.0 5.0 -5.0    1.0 1.0 1.0
+        </code>
+    </blockquote>
+    
+    <hr>
+    
+    <h4>This renders an ellipsoid that "listens" to linear transformations.</h4>
+    <img src="img/ellipsoid.png" class="img-rounded img-responsive img-scaled-down"><br>
+    <h4>Scene input:</h4>
+    <blockquote>
+        <code>
+            cam    0.0 0.0 17.0    -1.0 -1.0 14.0    1.0 -1.0 14.0    -1.0 1.0 14.0    1.0 1.0 14.0<br>
+            ltd     0.57735027 -0.57735027 -0.57735027    1.0 1.0 1.0<br>
+            ltd     -0.57735027  0.57735027 0.57735027    1.0 1.0 1.0<br>
+            mat     0.1 0.1 0.1     1.0 0.0 0.0     1.0 1.0 1.0     50.0    0.9 0.9 0.9<br>
+            xfs     2.0 0.5 1.0<br>
+            sph     0.0 0.0 0.0 1.0
+        </code>
+    </blockquote>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>CS 184</strong>
+                    </h4>
+                    <p>berkeley, ca</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (plz) not-call</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">copyright &copy; kelvin leong - cs 184</p>
+                </div>
+            </div>
+        </div>
+        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

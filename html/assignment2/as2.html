@@ -146,6 +146,15 @@
             sph     0.0 0.0 0.0 1.0
         </code>
     </blockquote>
+    
+    <hr>
+    
+    <h4>We have an <code>error</code> rate variable that prevents self-shadowing. Normally, it is set to <code>0.00001f</code>, so to illustrate what happens if it's too low, we set <code>error=0.0000001f</code>. This means that the image will have a lot of self-shadowing (a point on the sphere will "intersect" with itself and hence, shadow itself at that point)</h4>
+    <img src="img/self_shadowing.png" class="img-rounded img-responsive img-scaled-down"><br>
+    <h4>Scene input:</h4>
+    <blockquote>
+        Same as scene0 above (the very first scene on the page).
+    </blockquote>
 
     <!-- Footer -->
     <footer>
